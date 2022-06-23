@@ -11,8 +11,7 @@ class ToDoListAdmin(admin.ModelAdmin):
     list_filter = ['description']
     list_display_links = ['description']
     search_fields = ['description', 'status']
-    fields = ['description', 'status', 'text', 'date_of_completion']
-    readonly_fields = ['date_of_completion']
+    fields = ['description', 'status', 'date_of_completion']
 
 
 
