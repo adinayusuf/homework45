@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To Do List</title>
+</head>
+<body>
+    <a href="to_do_lists/add/">Create</a>
+    <h1>To do list</h1>
+    {% for to_do_list in  to_do_list %}
+        <h3>{{ to_do_list.description}}</h3>
+        <p><a href="to_do_lists/?pk={{ to_do_list.pk }}">More</a></p>
+    {% endfor %}
+</body>
+</html>
