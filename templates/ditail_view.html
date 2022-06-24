@@ -8,15 +8,15 @@
     <title>Ditail  view</title>
 </head>
 <body>
- <p>
-        {{ to_do_list.description}}
-        </p>
-        <p>
+<div style="display: inline-block">
+  <h1> {{ to_do_list.description}}</h1>
+        <p >
             {{to_do_list.status}}
         </p>
-        <p>
-            {{ to_do_list.date_of_completion}}
+        <p >
+            {{ to_do_list.date_of_completion|date:'Y-m-d'}}
         </p>
-<a href="/">Back</a>
+    <a href="/">Back</a>
+</div>
 </body>
 </html>
