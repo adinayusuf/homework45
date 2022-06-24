@@ -5,5 +5,5 @@ urlpatterns = [
     path('', index_view),
     path('to_do_lists/add/', create_description),
     path('to_do_lists/', list_view),
-    path('delete/<id>', delete_description)
+    path('delete/<int:pk>', delete_description)
 ]

@@ -22,12 +22,16 @@ def create_description(request):
     else:
         description = request.POST.get("description")
         status = request.POST.get("status")
-        new_des = To_do_list.objects.create(description=description, status=status)
+        date_of_completion = request.POST.get("date_of_completion")
+        new_des = To_do_list.objects.create(description=description, status=status,
+                                            date_of_completion=date_of_completion)
+        new_des.save()
         context = {"to_do_list": new_des}
+        print(context)
         return render(request, "ditail_view.html", context)
 
 
-def delete_description(request, id):
-    to_do_list = To_do_list.objects.get(pk=id)
+def delete_description(request, pk):
+    to_do_list = To_do_list.objects.get(pk=pk)
     to_do_list.delete()
     return render(request, 'index.html')
