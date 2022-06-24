@@ -1,0 +1,12 @@
+Tracking file by folder pattern:  migrations
+[
+{
+    "model": "webapp.to_do_list",
+    "pk": 13,
+    "fields": {
+        "description": "qwe2",
+        "status": "new",
+        "date_of_completion": null
+    }
+}
+]
