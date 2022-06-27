@@ -6,6 +6,7 @@ STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'),
 
 class To_do_list(models.Model):
     description = models.CharField(max_length=100, null=False, blank=False, verbose_name="Описание")
+    text = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Текст')
     status = models.CharField(max_length=40, choices=STATUS_CHOICES, null=False, blank=False, default=STATUS_CHOICES[0][0], verbose_name='Статус')
     date_of_completion = models.CharField(max_length=12, blank=True, null=True, verbose_name='Время выполнения')
 

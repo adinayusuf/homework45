@@ -17,7 +17,8 @@
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ list.get_status_display }}</h5>
-            <p class="card-text"> {{ list.description }} </p>
+            <p class="card-description"> {{ list.description }} </p>
+            <p class="card-text"> {{ list.text }} </p>
             <a href="to_do_lists/?pk={{ list.pk }}">MORE</a>
             <a href="delete/{{ list.pk }}">DELETE</a>
         </div>

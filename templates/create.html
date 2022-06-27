@@ -14,10 +14,12 @@
     {% csrf_token %}
     <label>Description:</label><br/>
     <input type="text" name="description"/><br/>
+    <label>Text:</label><br/>
+    <textarea  type="text" name="text"></textarea> <br/>
     <label>Status:</label><br/>
     <select name="status" id="">
     {% for value, statuses in status %}
-        <option value="{{value}}">{{statuses }}</option>
+        <option value="{{value}}">{{statuses}}</option>
     {% endfor %}
     </select>
  <br/>

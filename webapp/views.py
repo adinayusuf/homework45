@@ -21,10 +21,11 @@ def create_description(request):
         return render(request, "create.html", {'status': STATUS_CHOICES})
     else:
         description = request.POST.get("description")
+        text = request.POST.get("text")
         status = request.POST.get("status")
         date_of_completion = request.POST.get("date_of_completion")
         new_des = To_do_list.objects.create(description=description, status=status,
-                                            date_of_completion=date_of_completion)
+                                            date_of_completion=date_of_completion, text=text)
         new_des.save()
         context = {"to_do_list": new_des}
         print(context)
