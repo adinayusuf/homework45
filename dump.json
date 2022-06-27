@@ -2,11 +2,32 @@ Tracking file by folder pattern:  migrations
 [
 {
     "model": "webapp.to_do_list",
-    "pk": 13,
+    "pk": 6,
     "fields": {
-        "description": "qwe2",
-        "status": "new",
-        "date_of_completion": null
+        "description": "разрешить задушить себя :DDD",
+        "text": "Ладно,Нурбеку можно",
+        "status": "in_progress",
+        "date_of_completion": "2022-06-24"
+    }
+},
+{
+    "model": "webapp.to_do_list",
+    "pk": 7,
+    "fields": {
+        "description": "salat",
+        "text": "ольвье",
+        "status": "in_progress",
+        "date_of_completion": "2022-06-24"
+    }
+},
+{
+    "model": "webapp.to_do_list",
+    "pk": 9,
+    "fields": {
+        "description": "закончить домашку",
+        "text": "45 домашка сдана",
+        "status": "done",
+        "date_of_completion": "2022-06-30"
     }
 }
 ]
