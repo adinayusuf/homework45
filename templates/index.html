@@ -5,17 +5,25 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <title>To Do List</title>
 </head>
 <body>
-    <a href="/to_do_lists/add/">Create</a>
-    <a href="/">Back</a>
-    <h1>To do list</h1>
-    {% for list in  to_do_list %}
-        <h3>{{ list.description}}</h3>
-        <p> {{ list.status }}</p>
-        <p><a href="to_do_lists/?pk={{ list.pk }}">More</a></p>
-            <p><a href="delete/{{ list.pk}}">delete</a> </p>
-    {% endfor %}
+<a href="/to_do_lists/add/">Create</a>
+<a href="/">Back</a>
+<h1>To do list</h1>
+{% for list in  to_do_list %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ list.get_status_display }}</h5>
+            <p class="card-text"> {{ list.description }} </p>
+            <a href="to_do_lists/?pk={{ list.pk }}">MORE</a>
+            <a href="delete/{{ list.pk }}">DELETE</a>
+        </div>
+    </div>
+    <br>
+{% endfor %}
+
 </body>
 </html>
