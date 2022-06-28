@@ -2,25 +2,24 @@
 {% block title %} Detail List{% endblock %}
     {%  block nav %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'create_description' %}">Create list</a>
-  </li>
-        <li class="nav-item">
-{#    <a class="nav-link" href="{% url 'delete_description' %}">Delete list</a>#}
+    <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
   </li>
     {%  endblock %}
 {% block content %}
     <br>
-<div>
-    <div class="card">
-  <div class="card-header">
-   {{to_do_list.get_status_display}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ to_do_list.description}}</h5>
-    <p class="card-text">{{to_do_list.text}}</p>
-        <p class="card-text">{{ to_do_list.date_of_completion}}</p>
-    <a href="{% url "index" %}" class="btn btn-primary">BACK</a>
-  </div>
-</div>
+            <div class="card text-center">
+          <div class="card-header">
+            {{to_do_list.get_status_display}}
+          </div>
+          <div class="card-body">
+           <h5 class="card-title">{{ to_do_list.description}}</h5>
+            <p class="card-text">{{to_do_list.text}}</p>
+             <a href="{% url 'delete_description' to_do_list.pk %}" class="btn btn-primary">DELETE</a>
+            <a href="{% url "index" %}" class="btn btn-primary">BACK</a>
+          </div>
+          <div class="card-footer text-muted">
+            {{ to_do_list.date_of_completion}}
+          </div>
+        </div>
 {% endblock %}
 

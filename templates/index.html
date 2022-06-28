@@ -3,28 +3,19 @@
 {% load static %}
     {%  block nav %}
   <li class="nav-item">
-    <a class="nav-link" href="{% url 'create_description' %}">Create list</a>
+    <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
   </li>
     {%  endblock %}
 {% block content %}
-<h1>To do list</h1>
-{% for list in  to_do_list %}
-{#    <div class="card" style="width: 18rem;">#}
-{#        <div class="card-body">#}
-{#            <h5 class="card-title">{{ list.get_status_display }}</h5>#}
-{#            <p class="card-description"> {{ list.description }} </p>#}
-{#            <a href="{% url "list_view" list.pk %}">MORE</a>#}
-{#            <a href="{% url "delete_description" list.pk %}">DELETE</a>#}
-{#        </div>#}
-{#    </div>#}
-    <div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ list.get_status_display }}</h5>
-    <p class="card-text">{{ list.description }}</p>
-      <a href="{% url "list_view" list.pk %}" class="btn btn-primary">MORE</a>
-      <a href="{% url "delete_description" list.pk %}" class="btn btn-primary">DELETE</a>
-  </div>
-</div>
+        <h1>To do list</h1>
+        {% for list in  to_do_list %}
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ list.get_status_display }}</h5>
+                <p class="card-text">{{ list.description }}</p>
+                  <a href="{% url "list_view" list.pk %}" class="btn btn-primary">MORE</a>
+          </div>
+        </div>
     <br>
 {% endfor %}
 {% endblock %}
