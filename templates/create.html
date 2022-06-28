@@ -1,16 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Create To Do List</title>
-</head>
-<body>
-<h1>Create To Do List</h1>
-
-<form action="/to_do_lists/add/" method="post">
+{% extends "base.html" %}
+{% block title %} Creat List{% endblock %}
+{% block content %}
+    <h1>Create To Do List</h1>
+<form action=" " method="post">
     {% csrf_token %}
     <label>Description:</label><br/>
     <input type="text" name="description"/><br/>
@@ -29,7 +21,6 @@
     <input type="submit" value="Send"/>
 </form>
 <br/>
-<a href="/">Back</a>
-</body>
-</html>
+<a href="{% url "index" %}">BACK</a>
 
+{% endblock %}

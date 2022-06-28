@@ -1,25 +1,26 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ditail  view</title>
-</head>
-<body>
-<div style="display: inline-block">
-  <h1> {{ to_do_list.description}}</h1>
-        <p >
-            {{to_do_list.get_status_display}}
-        </p>
-         <p >
-            {{to_do_list.text}}
-        </p>
-        <p >
-            {{ to_do_list.date_of_completion}}
-        </p>
-    <a href="/">Back</a>
+{% extends "base.html" %}
+{% block title %} Detail List{% endblock %}
+    {%  block nav %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'create_description' %}">Create list</a>
+  </li>
+        <li class="nav-item">
+{#    <a class="nav-link" href="{% url 'delete_description' %}">Delete list</a>#}
+  </li>
+    {%  endblock %}
+{% block content %}
+    <br>
+<div>
+    <div class="card">
+  <div class="card-header">
+   {{to_do_list.get_status_display}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ to_do_list.description}}</h5>
+    <p class="card-text">{{to_do_list.text}}</p>
+        <p class="card-text">{{ to_do_list.date_of_completion}}</p>
+    <a href="{% url "index" %}" class="btn btn-primary">BACK</a>
+  </div>
 </div>
-</body>
-</html>
+{% endblock %}
+
