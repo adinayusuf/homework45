@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %} Удаление статьи {% endblock %}
+{% block content %}
+
+<form action=" " method="post">
+    {% csrf_token %}
+    <h2>Are you sure you want to delete the article {{ list.description }}?</h2>
+    <button type="submit" class="btn btn-primary">YES</button>
+<a href="{% url "list_view" list.pk %}" class="btn btn-primary">NO</a>
+</form>
+{% endblock %}
+

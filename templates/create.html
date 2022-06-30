@@ -5,7 +5,7 @@
 <form action=" " method="post">
     {% csrf_token %}
             <label>Description:</label><br/>
-            <input type="text" name="description"/><br/>
+            <input type="text" name="description" required/><br/>
             <label>Text:</label><br/>
             <textarea  type="text" name="text"></textarea> <br/>
             <label>Status:</label><br/>
@@ -16,11 +16,11 @@
             </select>
             <br/>
             <label>Date:</label><br/>
-            <input name="date_of_completion" placeholder="YYYY-MM-DD"/><br/>
+            <input type="date" name="date_of_completion">{{ date_of_completion | date:"Y-m-d"}}<br/>
             <br/>
             <input type="submit" value="Send"/>
 </form>
 <br/>
-<a href="{% url "index" %}" class="btn btn-primary" >BACK</a>
+<a href="{% url "index" %}" class="btn btn-primary">BACK</a>
 
 {% endblock %}
