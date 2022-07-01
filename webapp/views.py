@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 
-
+from forms import ListForm
 from webapp.models import To_do_list, STATUS_CHOICES
 
+STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'), ('done', 'Сделано')]
 
 def index_view(request):
     to_do_list = To_do_list.objects.order_by('-update')
@@ -21,18 +22,21 @@ def list_view(request, pk):
 
 def create_task(request):
     if request.method == "GET":
-        return render(request, "create.html", {'status': STATUS_CHOICES})
+        form = ListForm()
+        return render(request, "create.html", {'form': form})
     else:
-        description = request.POST.get("description")
-        text = request.POST.get("text")
-        status = request.POST.get("status")
-        date_of_completion = request.POST.get("date_of_completion")
+        form = ListForm(data=request.POST)
+        if form.is_valid():
+            description = form.cleaned_data.get("description")
+            text = form.cleaned_data.get("text")
+            status = form.cleaned_data.get("status")
+            date_of_completion = form.cleaned_data.get("date_of_completion")
         if not date_of_completion:
             date_of_completion = None
         new_des = To_do_list.objects.create(description=description, status=status,
                                             date_of_completion=date_of_completion, text=text)
         new_des.save()
-        return redirect("list_view", pk=new_des.pk)
+        return redirect("create.html", {'form': form})
 
 
 def delete_description(request, pk):
@@ -46,13 +50,18 @@ def delete_description(request, pk):
 def update(request, pk):
     list = get_object_or_404(To_do_list, pk=pk)
     if request.method == "GET":
-        return render(request, "update.html", {'list': list})
-    elif request.method == 'POST':
-        list.description = request.POST.get("description")
-        list.text = request.POST.get("text")
-        list.status = request.POST.get("status")
-        list.date_of_completion = request.POST.get("date_of_completion")
-        # if not list.date_of_completion:
-        #     list.date_of_completion = None
-        list.save()
-        return redirect("list_view", pk=list.pk)
+        form = ListForm(initial={
+            'description': list.description,
+            'text': list.text,
+            'status': list.status,
+        })
+        return render(request, "update.html", {'form': form})
+    else:
+        form = ListForm(data=request.POST)
+        if form.is_valid():
+            list.description = form.cleaned_data.get("description")
+            list.text = form.cleaned_data.get("text")
+            list.status = form.cleaned_data.get("status")
+            list.save()
+            return redirect("list_view", pk=list.pk)
+        return render(request, "update.html", {'form': form})

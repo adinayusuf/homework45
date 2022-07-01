@@ -15,8 +15,8 @@
            <h5 class="card-title">{{ to_do_list.description}}</h5>
             <p class="card-text">{{to_do_list.text}}</p>
              <a href="{% url 'delete_description' to_do_list.pk %}" class="btn btn-primary">DELETE</a>
-              <a href="{% url "update" to_do_list.pk %}" class="btn btn-primary">EDIT</a>
-               <a href="{% url "index" %}" class="btn btn-primary">BACK</a>
+              <a href="{% url 'update' to_do_list.pk %}" class="btn btn-primary">EDIT</a>
+               <a href="{% url 'index' %}" class="btn btn-primary">BACK</a>
           </div>
           <div class="card-footer text-muted">
             {{ to_do_list.date_of_completion}}
