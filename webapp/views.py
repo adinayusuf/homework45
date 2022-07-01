@@ -6,6 +6,7 @@ from webapp.models import To_do_list, STATUS_CHOICES
 
 STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'), ('done', 'Сделано')]
 
+
 def index_view(request):
     to_do_list = To_do_list.objects.order_by('-update')
     context = {'to_do_list': to_do_list}
@@ -36,7 +37,7 @@ def create_task(request):
         new_des = To_do_list.objects.create(description=description, status=status,
                                             date_of_completion=date_of_completion, text=text)
         new_des.save()
-        return redirect("create.html", {'form': form})
+        return redirect("list_view", pk=new_des.pk)
 
 
 def delete_description(request, pk):
@@ -46,6 +47,7 @@ def delete_description(request, pk):
     else:
         list.delete()
         return redirect("index")
+
 
 def update(request, pk):
     list = get_object_or_404(To_do_list, pk=pk)
