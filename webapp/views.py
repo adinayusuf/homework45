@@ -30,7 +30,7 @@ def create_task(request):
             description = form.cleaned_data.get("description")
             text = form.cleaned_data.get("text")
             status = form.cleaned_data.get("status")
-            date_of_completion = form.cleaned_data.get("date_of_completion")
+            date_of_completion = form.cleaned_data.get("date_of_completion", None)
         if not date_of_completion:
             date_of_completion = None
         new_des = To_do_list.objects.create(description=description, status=status,
@@ -54,6 +54,7 @@ def update(request, pk):
             'description': list.description,
             'text': list.text,
             'status': list.status,
+            'date_of_completion': list.date_of_completion
         })
         return render(request, "update.html", {'form': form})
     else:
@@ -62,6 +63,7 @@ def update(request, pk):
             list.description = form.cleaned_data.get("description")
             list.text = form.cleaned_data.get("text")
             list.status = form.cleaned_data.get("status")
+            list.date_of_completion = form.cleaned_data.get("date_of_completion", None)
             list.save()
             return redirect("list_view", pk=list.pk)
         return render(request, "update.html", {'form': form})
