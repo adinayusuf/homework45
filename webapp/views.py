@@ -1,24 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
+from django.views import View
+from django.views.generic import TemplateView
 
 from .forms import ListForm
-from webapp.models import ToDoList, STATUS_CHOICES
+from webapp.models import ToDoList
 
-STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'), ('done', 'Сделано')]
-
-
-def index_view(request):
-    to_do_list = ToDoList.objects.order_by('-update')
-    context = {'to_do_list': to_do_list}
-    return render(request, 'index.html', context)
+class IndexView(View):
+    def get(self, request, *args, **kwargs):
+        to_do_list = ToDoList.objects.order_by('-update')
+        context = {'to_do_list': to_do_list}
+        return render(request, 'index.html', context)
 
 
-def list_view(request, pk):
-    try:
-        to_do_list = ToDoList.objects.get(pk=pk)
-    except ToDoList.DoesNotExist:
-        return HttpResponseNotFound("Page not find")
-    return render(request, "ditail_view.html", {'to_do_list': to_do_list})
+class ListView(TemplateView):
+
+    def get_template_names(self):
+        return "ditail_view.html"
+
+    def get_context_data(self, **kwargs):
+        try:
+            pk = kwargs.get('pk')
+            to_do_list = get_object_or_404(ToDoList, pk=pk)
+            kwargs['to_do_list'] = to_do_list
+        except ToDoList.DoesNotExist:
+            return HttpResponseNotFound("Page not find")
+        return super().get_context_data(**kwargs)
 
 
 def create_task(request):
@@ -35,7 +42,7 @@ def create_task(request):
         if not date_of_completion:
             date_of_completion = None
         new_des = ToDoList.objects.create(description=description, status=status,
-                                            date_of_completion=date_of_completion, text=text)
+                                          date_of_completion=date_of_completion, text=text)
         new_des.save()
         return redirect("list_view", pk=new_des.pk)
 
