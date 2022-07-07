@@ -1,22 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 
-from forms import ListForm
-from webapp.models import To_do_list, STATUS_CHOICES
+from .forms import ListForm
+from webapp.models import ToDoList, STATUS_CHOICES
 
 STATUS_CHOICES = [('new', 'Новая'), ('in_progress', 'В процессе'), ('done', 'Сделано')]
 
 
 def index_view(request):
-    to_do_list = To_do_list.objects.order_by('-update')
+    to_do_list = ToDoList.objects.order_by('-update')
     context = {'to_do_list': to_do_list}
     return render(request, 'index.html', context)
 
 
 def list_view(request, pk):
     try:
-        to_do_list = To_do_list.objects.get(pk=pk)
-    except To_do_list.DoesNotExist:
+        to_do_list = ToDoList.objects.get(pk=pk)
+    except ToDoList.DoesNotExist:
         return HttpResponseNotFound("Page not find")
     return render(request, "ditail_view.html", {'to_do_list': to_do_list})
 
@@ -34,14 +34,14 @@ def create_task(request):
             date_of_completion = form.cleaned_data.get("date_of_completion", None)
         if not date_of_completion:
             date_of_completion = None
-        new_des = To_do_list.objects.create(description=description, status=status,
+        new_des = ToDoList.objects.create(description=description, status=status,
                                             date_of_completion=date_of_completion, text=text)
         new_des.save()
         return redirect("list_view", pk=new_des.pk)
 
 
 def delete_description(request, pk):
-    list = get_object_or_404(To_do_list, pk=pk)
+    list = get_object_or_404(ToDoList, pk=pk)
     if request.method == "GET":
         return render(request, "delete.html", {'list': list})
     else:
@@ -50,7 +50,7 @@ def delete_description(request, pk):
 
 
 def update(request, pk):
-    list = get_object_or_404(To_do_list, pk=pk)
+    list = get_object_or_404(ToDoList, pk=pk)
     if request.method == "GET":
         form = ListForm(initial={
             'description': list.description,

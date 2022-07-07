@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from webapp.models import To_do_list
+from webapp.models import ToDoList
 
 
 
@@ -15,4 +15,4 @@ class ToDoListAdmin(admin.ModelAdmin):
 
 
 
-admin.site.register(To_do_list,ToDoListAdmin)
+admin.site.register(ToDoList,ToDoListAdmin)
