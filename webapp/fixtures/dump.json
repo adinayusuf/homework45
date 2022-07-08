@@ -1,33 +1,104 @@
-Tracking file by folder pattern:  migrations
 [
 {
-    "model": "webapp.to_do_list",
-    "pk": 6,
+    "model": "webapp.status",
+    "pk": 1,
     "fields": {
-        "description": "разрешить задушить себя :DDD",
-        "text": "Ладно,Нурбеку можно",
-        "status": "in_progress",
-        "date_of_completion": "2022-06-24"
+        "status": "New"
     }
 },
 {
-    "model": "webapp.to_do_list",
-    "pk": 7,
+    "model": "webapp.status",
+    "pk": 2,
     "fields": {
-        "description": "salat",
-        "text": "ольвье",
-        "status": "in_progress",
-        "date_of_completion": "2022-06-24"
+        "status": "In Progress"
     }
 },
 {
-    "model": "webapp.to_do_list",
-    "pk": 9,
+    "model": "webapp.status",
+    "pk": 3,
     "fields": {
-        "description": "закончить домашку",
-        "text": "45 домашка сдана",
-        "status": "done",
-        "date_of_completion": "2022-06-30"
+        "status": "Done"
+    }
+},
+{
+    "model": "webapp.type",
+    "pk": 1,
+    "fields": {
+        "type": "Task"
+    }
+},
+{
+    "model": "webapp.type",
+    "pk": 2,
+    "fields": {
+        "type": "Bug"
+    }
+},
+{
+    "model": "webapp.type",
+    "pk": 3,
+    "fields": {
+        "type": "Enhancement"
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 1,
+    "fields": {
+        "created_at": "2022-07-07T15:30:53.343Z",
+        "updated_at": "2022-07-07T15:30:53.343Z",
+        "summary": "Начать обучения",
+        "description": null,
+        "status": 2,
+        "type": 1
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 2,
+    "fields": {
+        "created_at": "2022-07-07T15:31:16.956Z",
+        "updated_at": "2022-07-07T15:31:16.956Z",
+        "summary": "придумать таски",
+        "description": null,
+        "status": 3,
+        "type": 1
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 3,
+    "fields": {
+        "created_at": "2022-07-07T15:31:35.735Z",
+        "updated_at": "2022-07-07T15:31:35.735Z",
+        "summary": "закупить продукты",
+        "description": null,
+        "status": 1,
+        "type": 1
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 4,
+    "fields": {
+        "created_at": "2022-07-07T15:32:34.583Z",
+        "updated_at": "2022-07-07T15:32:34.583Z",
+        "summary": "сходить к зубному",
+        "description": null,
+        "status": 2,
+        "type": 1
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 5,
+    "fields": {
+        "created_at": "2022-07-07T15:33:41.867Z",
+        "updated_at": "2022-07-07T15:33:41.867Z",
+        "summary": "накопить кошку",
+        "description": null,
+        "status": 3,
+        "type": 1
     }
 }
 ]

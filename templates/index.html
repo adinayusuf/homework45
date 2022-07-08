@@ -11,9 +11,9 @@
         {% for list in  to_do_list %}
             <div class="card" style="width: 18rem;">
               <div class="card-body">
-                <h5 class="card-title">{{ list.get_status_display }}</h5>
-                <p class="card-text">{{ list.description }}</p>
-                  <a href="{% url "list_view" list.pk %}" class="btn btn-primary">MORE</a>
+                <h5 class="card-title">{{ list.summary }}</h5>
+                <p class="card-text">{{ list.text }}</p>
+                  <a href="{% url "detail_view" list.pk %}" class="btn btn-primary">MORE</a>
           </div>
         </div>
     <br>
