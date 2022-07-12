@@ -7,11 +7,12 @@ from .forms import ListForm
 from webapp.models import ToDoList
 
 
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        to_do_list = ToDoList.objects.order_by('-updated_at')
-        context = {'to_do_list': to_do_list}
-        return render(request, 'index.html', context)
+class IndexView(TemplateView):
+    template_name = 'index.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['to_do_list'] = ToDoList.objects.all()
+        return super().get_context_data(**kwargs)
 
 
 class ListView(TemplateView):
