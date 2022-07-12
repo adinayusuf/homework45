@@ -1,14 +1,11 @@
-from datetime import date
-
-from django import forms
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
-from django.forms import widgets
 
 from webapp.models import ToDoList
+from django.forms import CheckboxSelectMultiple, Textarea
 
 
 class ListForm(ModelForm):
     class Meta:
         model = ToDoList
-        fields = '__all__'
+        exclude = ["created_at", "updated_at"]
+        widgets = {'types': CheckboxSelectMultiple, 'description': Textarea(attrs={"rows": 1, "cols": 24})}

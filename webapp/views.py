@@ -30,24 +30,21 @@ class ListView(TemplateView):
 class CreateTask(View):
 
     def get(self, request, *args, **kwargs):
-        self.form = ListForm()
-        return render(request, "create.html", {'form': self.form})
+        form = ListForm()
+        return render(request, "create.html", {'form': form})
 
     def post(self, request, *args, **kwargs):
-        self.form = ListForm(data=request.POST)
-        if self.form.is_valid():
-            self.form.summary = self.form.cleaned_data.get("summary")
-            self.form.description = self.form.cleaned_data.get("description")
-            self.form.status = self.form.cleaned_data.get("status")
-            self.form.created_at = self.form.cleaned_data.get("created_at", None)
-            self.form.type = self.form.cleaned_data.get('type', None)
-        if not self.form.created_at:
-            self.form.created_at = None
-        new_des = ToDoList.objects.create(summary=self.form.summary, status=self.form.status,
-                                          created_at=self.form.created_at, description=self.form.description,
-                                          type=self.form.type)
-        new_des.save()
-        return redirect("detail_view", pk=new_des.pk)
+        form = ListForm(data=request.POST)
+        if form.is_valid():
+            summary = form.cleaned_data.get("summary")
+            description = form.cleaned_data.get("description")
+            status = form.cleaned_data.get("status")
+            types = form.cleaned_data.pop('types')
+            new_des = ToDoList.objects.create(summary=summary, status=status,
+                                              description=description)
+            new_des.types.set(types)
+            return redirect("detail_view", pk=new_des.pk)
+        return render(request, "create.html", {'form': form})
 
 
 class DeleteTask(View):
@@ -64,8 +61,6 @@ class DeleteTask(View):
         return redirect("index")
 
 
-
-
 class UpdateTask(View):
 
     def dispatch(self, request, *args, **kwargs):
@@ -79,7 +74,7 @@ class UpdateTask(View):
                 'summary': self.list.summary,
                 'description': self.list.description,
                 'status': self.list.status,
-                'type': self.list.type,
+                'types': self.list.types.all(),
                 'created_at': self.list.created_at
             })
             return render(request, "update.html", {'form': form})
@@ -91,6 +86,7 @@ class UpdateTask(View):
             self.list.description = form.cleaned_data.get("description")
             self.list.status = form.cleaned_data.get("status")
             self.list.created_at = form.cleaned_data.get("created_at", None)
+            self.list.types.set(form.cleaned_data.pop("types", None))
             self.list.save()
             return redirect("detail_view", pk=self.list.pk)
         return render(request, "update.html", {'form': form})

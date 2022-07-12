@@ -10,10 +10,10 @@ class BaseModel(models.Model):
 
 
 class Status(models.Model):
-    status = models.CharField(max_length=40, null=False, blank=False, verbose_name='Статус')
+    status = models.CharField(max_length=40, verbose_name='Статус')
 
     def __str__(self):
-        return f"{self.id}.{self.status}"
+        return f"{self.status}"
 
     class Meta:
         db_table = 'status'
@@ -25,7 +25,7 @@ class Type(models.Model):
     type = models.CharField(max_length=40, verbose_name='Тип')
 
     def __str__(self):
-        return f"{self.id}.{self.type}"
+        return f"{self.type}"
 
     class Meta:
         db_table = 'type'
@@ -46,4 +46,3 @@ class ToDoList(BaseModel):
         db_table = 'tasks'
         verbose_name = 'Описание'
         verbose_name_plural = 'Описания'
-

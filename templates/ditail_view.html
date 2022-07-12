@@ -14,8 +14,8 @@
         <div class="card-body">
             <h5 class="card-title">{{ to_do_list.summary|upper }}</h5>
             <p class="card-text">{{ to_do_list.description }}</p>
-            <p class="card-text">{{ to_do_list.status }}</p>
-            <p class="card-text">{{ to_do_list.type }}</p>
+            <p class="card-text">Status: {{ to_do_list.status }}</p>
+            <p>Type: {% for type in to_do_list.types.all %}{{ type.type }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
             <a href="{% url 'delete_description' to_do_list.pk %}" class="btn btn-primary">DELETE</a>
             <a href="{% url 'update' to_do_list.pk %}" class="btn btn-primary">EDIT</a>
             <a href="{% url 'index' %}" class="btn btn-primary">BACK</a>
