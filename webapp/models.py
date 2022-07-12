@@ -37,11 +37,7 @@ class ToDoList(BaseModel):
     summary = models.CharField(max_length=100, null=True, blank=False, verbose_name="Описание")
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Текст')
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks')
-    types = models.ManyToManyField('webapp.Type',
-                                   related_name='type_tasks',
-                                   through='webapp.ToDoListType',
-                                   through_fields=('task', 'type'),
-                                   blank=True)
+    types = models.ManyToManyField('webapp.Type', related_name='type_tasks', blank=True)
 
     def __str__(self):
         return f"{self.id}. {self.summary}: {self.status}"
@@ -51,14 +47,3 @@ class ToDoList(BaseModel):
         verbose_name = 'Описание'
         verbose_name_plural = 'Описания'
 
-
-class ToDoListType(models.Model):
-    task = models.ForeignKey("webapp.ToDoList",
-                             related_name='task_type',
-                             on_delete=models.CASCADE,
-                             verbose_name='Задача'
-                             )
-    type = models.ForeignKey('webapp.Type',
-                             related_name='type_task',
-                             on_delete=models.CASCADE,
-                             verbose_name='Тип')
