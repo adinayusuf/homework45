@@ -79,6 +79,7 @@ class UpdateTask(View):
                 'summary': self.list.summary,
                 'description': self.list.description,
                 'status': self.list.status,
+                'type': self.list.type,
                 'created_at': self.list.created_at
             })
             return render(request, "update.html", {'form': form})
