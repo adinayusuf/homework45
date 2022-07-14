@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
+from django.urls import reverse
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, FormView
 
+from webapp.base_view import FormView as CustumerFormView
 from .forms import ListForm
 from webapp.models import ToDoList
 
@@ -28,27 +30,23 @@ class ListView(TemplateView):
         return super().get_context_data(**kwargs)
 
 
-class CreateTask(View):
+class CreateTask(CustumerFormView):
+    form_class = ListForm
+    template_name = 'create.html'
 
-    def get(self, request, *args, **kwargs):
-        form = ListForm()
-        return render(request, "create.html", {'form': form})
+    def form_valid(self, form):
+        types = form.cleaned_data.pop('types')
+        self.task = ToDoList.objects.create(**form.cleaned_data)
+        self.task.types.set(types)
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        form = ListForm(data=request.POST)
-        if form.is_valid():
-            summary = form.cleaned_data.get("summary")
-            description = form.cleaned_data.get("description")
-            status = form.cleaned_data.get("status")
-            types = form.cleaned_data.pop('types')
-            new_des = ToDoList.objects.create(summary=summary, status=status,
-                                              description=description)
-            new_des.types.set(types)
-            return redirect("detail_view", pk=new_des.pk)
-        return render(request, "create.html", {'form': form})
+    def get_redirect_url(self):
+        return redirect('detail_view', pk=self.task.pk)
+
 
 
 class DeleteTask(View):
+
     def dispatch(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
         self.list = get_object_or_404(ToDoList, pk=pk)
@@ -62,32 +60,32 @@ class DeleteTask(View):
         return redirect("index")
 
 
-class UpdateTask(View):
+class UpdateTask(FormView):
+    form_class = ListForm
+    template_name = "update.html"
+
+    def get_success_url(self):
+        return reverse('detail_view', kwargs={'pk': self.task.pk})
 
     def dispatch(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        self.list = get_object_or_404(ToDoList, pk=pk)
+        self.task = self.get_object()
         return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, *args, **kwargs):
-        if request.method == "GET":
-            form = ListForm(initial={
-                'summary': self.list.summary,
-                'description': self.list.description,
-                'status': self.list.status,
-                'types': self.list.types.all(),
-                'created_at': self.list.created_at
-            })
-            return render(request, "update.html", {'form': form})
+    def get_object(self):
+        return get_object_or_404(ToDoList, pk=self.kwargs.get('pk'))
 
-    def post(self, request, *args, **kwargs):
-        form = ListForm(data=request.POST)
-        if form.is_valid():
-            self.list.summary = form.cleaned_data.get("summary")
-            self.list.description = form.cleaned_data.get("description")
-            self.list.status = form.cleaned_data.get("status")
-            self.list.created_at = form.cleaned_data.get("created_at", None)
-            self.list.types.set(form.cleaned_data.pop("types", None))
-            self.list.save()
-            return redirect("detail_view", pk=self.list.pk)
-        return render(request, "update.html", {'form': form})
+    def get_initial(self):
+        initial = {}
+        for key in 'summary', 'description', 'status':
+            initial[key] = getattr(self.task, key)
+        initial['types'] = self.task.types.all()
+        return initial
+
+    def form_valid(self, form):
+        types = form.cleaned_data.pop('types')
+        for key, value in form.cleaned_data.items():
+            if value is not None:
+                setattr(self.task, key, value)
+        self.task.save()
+        self.task.types.set(types)
+        return super().form_valid(form)
