@@ -1,13 +1,17 @@
 import re
 
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
+from django.forms import ModelForm, forms
 
+from validate import MinLengthValidator
 from webapp.models import ToDoList
 from django.forms import CheckboxSelectMultiple, Textarea
 
 
+
 class ListForm(ModelForm):
+    summary = forms.CharField(max_length=50, required=True, label='Summary',
+                              validators=[MinLengthValidator(15)])
     class Meta:
         model = ToDoList
         exclude = ["created_at", "updated_at"]
