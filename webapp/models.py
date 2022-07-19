@@ -1,5 +1,7 @@
 from django.db import models
 
+from validate import MinLengthValidator
+
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(auto_now=True, verbose_name='Время создания')
@@ -34,7 +36,8 @@ class Type(models.Model):
 
 
 class ToDoList(BaseModel):
-    summary = models.CharField(max_length=100, null=True, blank=False, verbose_name="Описание")
+    summary = models.CharField(max_length=100, null=True, blank=False, verbose_name="Описание",
+                               validators=[MinLengthValidator(15)])
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Текст')
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks')
     types = models.ManyToManyField('webapp.Type', related_name='type_tasks', blank=True)

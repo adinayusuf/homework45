@@ -10,8 +10,6 @@ from django.forms import CheckboxSelectMultiple, Textarea
 
 
 class ListForm(ModelForm):
-    summary = forms.CharField(max_length=50, required=True, label='Summary',
-                              validators=[MinLengthValidator(15)])
     class Meta:
         model = ToDoList
         exclude = ["created_at", "updated_at"]
