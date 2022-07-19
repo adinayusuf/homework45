@@ -1,0 +1,12 @@
+from webapp.models import ToDoList,Type,Status
+from datetime import datetime, timedelta
+from django.db.models import Q
+
+#task1
+ToDoList.objects.filter(created_at__date__gte=datatime.now() -timedelta(days=30))
+
+#task2
+ToDoList.objects.filter(status__status__in=['Done', 'In progress'], types__type__in=['Bug', 'Task'])
+
+#task3
+ToDoList.objects.filter(Q(summary__icontains='bug') | Q(types__type__icontains='bug')).exclude(status__status='done')

@@ -3,7 +3,7 @@ import re
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm, forms
 
-from validate import MinLengthValidator
+
 from webapp.models import ToDoList
 from django.forms import CheckboxSelectMultiple, Textarea
 
@@ -18,7 +18,7 @@ class ListForm(ModelForm):
 
     def clean_summary(self):
         title = self.cleaned_data.get('summary')
-        if len(title) > 15:
+        if len(title) > 25:
             raise ValidationError('Summary must be less 10 symbol')
         if not re.match('^[a-zA-Яа-я\s]+$', title):
             raise ValidationError('Enter only letters')
@@ -31,6 +31,6 @@ class ListForm(ModelForm):
 
     def clean_description(self):
         des = self.cleaned_data.get('description')
-        if len(des) > 15:
+        if len(des) < 15:
             raise ValidationError('description is too short')
         return des

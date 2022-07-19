@@ -80,13 +80,16 @@
     "model": "webapp.todolist",
     "pk": 12,
     "fields": {
-        "created_at": "2022-07-12T10:31:44.449Z",
+        "created_at": "2022-07-19T10:59:10.575Z",
         "updated_at": "2022-07-12T10:31:44.449Z",
-        "summary": "Home work",
-        "description": "dont forget to do hw #50",
+        "summary": "Home works gfdf",
+        "description": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
         "status": 2,
         "types": [
-            1
+            1,
+            2,
+            4,
+            6
         ]
     }
 },
@@ -94,13 +97,14 @@
     "model": "webapp.todolist",
     "pk": 13,
     "fields": {
-        "created_at": "2022-07-12T10:33:05.919Z",
+        "created_at": "2022-07-14T13:50:47.122Z",
         "updated_at": "2022-07-12T10:33:05.919Z",
-        "summary": "buy dress",
+        "summary": "Buy dress",
         "description": "for HB",
         "status": 2,
         "types": [
-            1
+            1,
+            5
         ]
     }
 },
@@ -108,13 +112,95 @@
     "model": "webapp.todolist",
     "pk": 14,
     "fields": {
-        "created_at": "2022-07-12T10:33:37.908Z",
+        "created_at": "2022-07-19T10:57:01.890Z",
         "updated_at": "2022-07-12T10:33:37.908Z",
-        "summary": "create a new task",
+        "summary": "create new task",
         "description": "for homework 50",
         "status": 3,
         "types": [
-            1
+            1,
+            2
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 23,
+    "fields": {
+        "created_at": "2022-07-19T10:59:55.161Z",
+        "updated_at": "2022-07-19T10:59:55.162Z",
+        "summary": "Where does itsd",
+        "description": "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.",
+        "status": 2,
+        "types": [
+            2,
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 24,
+    "fields": {
+        "created_at": "2022-07-19T11:12:09.049Z",
+        "updated_at": "2022-07-19T11:12:09.049Z",
+        "summary": "The standard Lorem",
+        "description": "n voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+        "status": 3,
+        "types": [
+            1,
+            2,
+            3,
+            6
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 25,
+    "fields": {
+        "created_at": "2022-07-19T11:20:26.629Z",
+        "updated_at": "2022-07-19T11:20:26.629Z",
+        "summary": "translation by H Rackham",
+        "description": "by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be",
+        "status": 3,
+        "types": [
+            2,
+            3,
+            4,
+            5
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 26,
+    "fields": {
+        "created_at": "2022-07-19T11:21:05.589Z",
+        "updated_at": "2022-07-19T11:21:05.589Z",
+        "summary": "The standarddfd",
+        "description": "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+        "status": 3,
+        "types": [
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 27,
+    "fields": {
+        "created_at": "2022-07-19T11:21:42.797Z",
+        "updated_at": "2022-07-19T11:21:42.797Z",
+        "summary": "Lorem Ipsum dzf",
+        "description": "ext of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specime",
+        "status": 3,
+        "types": [
+            1,
+            2,
+            4
         ]
     }
 }

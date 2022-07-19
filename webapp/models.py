@@ -1,6 +1,5 @@
 from django.db import models
-
-from validate import MinLengthValidator
+from webapp.validate import MinLengthValidator
 
 
 class BaseModel(models.Model):
