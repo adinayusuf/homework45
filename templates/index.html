@@ -1,22 +1,25 @@
-{%  extends "base.html"%}
+{% extends "base.html" %}
 {% block title %} To do list{% endblock %}
 {% load static %}
-    {%  block nav %}
-  <li class="nav-item">
-    <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
-  </li>
-    {%  endblock %}
+{% block nav %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
+    </li>
+{% endblock %}
 {% block content %}
-        <h1>To do list</h1>
-        {% for list in  to_do_list %}
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
+    <h1>To do list</h1>
+    {% for list in  to_do_list %}
+        <div class="card" style="width: 18rem;">) Агзамов Фарух - 18
+            <div class="card-body">
                 <h5 class="card-title">{{ list.summary }}</h5>
                 <p class="card-text">{{ list.description }}</p>
-                  <a href="{% url "detail_view" list.pk %}" class="btn btn-primary">MORE</a>
-          </div>
+                <a href="{% url "detail_view" list.pk %}" class="btn btn-primary">MORE</a>
+            </div>
         </div>
-    <br>
-{% endfor %}
+        <br>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif  %}
 {% endblock %}
 

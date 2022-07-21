@@ -34,3 +34,8 @@ class ListForm(ModelForm):
         if len(des) < 15:
             raise ValidationError('description is too short')
         return des
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=50,required =False, label='Find')
+
