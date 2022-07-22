@@ -1,12 +1,11 @@
 import re
 
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, forms
-
+from django import forms
+from django.forms import ModelForm
 
 from webapp.models import ToDoList
 from django.forms import CheckboxSelectMultiple, Textarea
-
 
 
 class ListForm(ModelForm):
@@ -37,5 +36,4 @@ class ListForm(ModelForm):
 
 
 class SearchForm(forms.Form):
-    search = forms.CharField(max_length=50,required =False, label='Find')
-
+    search = forms.CharField(max_length=50, required=False, label='Find')

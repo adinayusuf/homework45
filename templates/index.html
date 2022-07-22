@@ -7,9 +7,10 @@
     </li>
 {% endblock %}
 {% block content %}
+    {% include 'partial/simple_search.html' %}
     <h1>To do list</h1>
     {% for list in  to_do_list %}
-        <div class="card" style="width: 18rem;">) Агзамов Фарух - 18
+        <div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">{{ list.summary }}</h5>
                 <p class="card-text">{{ list.description }}</p>
