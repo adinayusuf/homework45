@@ -18,7 +18,7 @@ class IndexView(ListView):
     template_name = 'index.html'
     context_object_name = 'to_do_list'
     ordering = '-updated_at'
-    paginate_by = 3
+    paginate_by = 10
     paginate_orphans = 1
 
     def get(self, request, *args, **kwargs):
@@ -38,6 +38,7 @@ class IndexView(ListView):
         if self.search_value:
             query = urlencode({'search': self.search_value})
             context['query'] = query
+            context['search'] = self.search_value
         return context
 
     def get_search_form(self):

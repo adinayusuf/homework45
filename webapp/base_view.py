@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
 
-class ListView(TemplateView):
+class ListView(ListView):
     model = None
-    context_key = 'task'
+    context_key = 'to_do_list'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
