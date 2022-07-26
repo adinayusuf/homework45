@@ -66,6 +66,9 @@ class Project(models.Model):
     def __str__(self):
         return f"{self.id}. {self.title}: {self.description}"
 
+    def get_absolute_url(self):
+        return reverse('project_detailview.html', kwargs={'pk': self.pk})
+
     class Meta:
         db_table = 'projects'
         verbose_name = 'Проект'

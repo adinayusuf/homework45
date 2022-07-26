@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %} To do list{% endblock %}
+{% load static %}
+{% block nav %}
+{#    <li class="nav-item">#}
+{#        <a class="nav-link" href="{% url 'create_task' %}">Create list</a>#}
+{#    </li>#}
+{% endblock %}
+{% block content %}
+{#    {% include 'partial/simple_search.html' %}#}
+    <h1>Projects</h1>
+    {% for project in  projects %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+                <p class="card-text">{{ project.description }}</p>
+                <a href="{{ project.get_absolute }}" class="btn btn-primary">MORE</a>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{#    {% if is_paginated %}#}
+{#        {% include 'partial/pagination.html' %}#}
+{#    {% endif %}#}
+{% endblock %}
+
