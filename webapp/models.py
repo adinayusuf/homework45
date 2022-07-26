@@ -42,7 +42,7 @@ class ToDoList(BaseModel):
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Текст')
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks')
     types = models.ManyToManyField('webapp.Type', related_name='type_tasks', blank=True)
-    project = models.ForeignKey('webapp.Project', related_name='project_tasks', on_delete=models.CASCADE,
+    project = models.ForeignKey('webapp.Project', related_name='project_tasks', default=1, on_delete=models.CASCADE,
                                 verbose_name='Проект')
 
     def __str__(self):
@@ -67,7 +67,7 @@ class Project(models.Model):
         return f"{self.id}. {self.title}: {self.description}"
 
     def get_absolute_url(self):
-        return reverse('project_detailview.html', kwargs={'pk': self.pk})
+        return reverse('project_detail', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'projects'
