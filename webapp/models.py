@@ -48,3 +48,5 @@ class ToDoList(BaseModel):
         db_table = 'tasks'
         verbose_name = 'Описание'
         verbose_name_plural = 'Описания'
+
+

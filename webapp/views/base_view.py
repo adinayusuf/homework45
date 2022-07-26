@@ -1,19 +1,33 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic import TemplateView, ListView
 
 
-class ListView(ListView):
-    model = None
+class DetailView(TemplateView):
     context_key = 'to_do_list'
-
+    model = None
+    key_kwarg = 'pk'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[self.context_key] = self.model.objects.all()
+        context[self.context_key] = self.get_object()
         return context
 
-    def get_objects(self):
-        return self.model.objects.all()
+    def get_object(self):
+        pk = self.kwargs.get(self.key_kwarg)
+        return get_object_or_404(self.model, pk=pk)
+
+
+# class ListView(ListView):
+#     model = None
+#     context_key = 'to_do_list'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context[self.context_key] = self.model.objects.all()
+#         return context
+#
+#     def get_objects(self):
+#         return self.model.objects.all()
 
 
 class FormView(View):

@@ -1,14 +1,11 @@
-from urllib import request
-
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseNotFound
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
 
-from webapp.base_view import FormView as CustomFormView, ListView as CustomListView
+from webapp.views.base_view import DetailView
 from forms import ListForm, SearchForm
 from webapp.models import ToDoList
 
@@ -49,17 +46,9 @@ class IndexView(ListView):
             return self.form.cleaned_data.get('search')
 
 
-class ListView(TemplateView):
+class ListTaskView(DetailView):
     template_name = "tasks/ditail_view.html"
-
-    def get_context_data(self, **kwargs):
-        try:
-            pk = kwargs.get('pk')
-            to_do_list = get_object_or_404(ToDoList, pk=pk)
-            kwargs['to_do_list'] = to_do_list
-        except ToDoList.DoesNotExist:
-            return HttpResponseNotFound("Page not find")
-        return super().get_context_data(**kwargs)
+    model = ToDoList
 
 
 class SearchView(ListView):
@@ -75,18 +64,12 @@ class SearchView(ListView):
         return ToDoList.objects.all()
 
 
-class CreateTask(CustomFormView):
+class CreateTask(CreateView):
     form_class = ListForm
     template_name = 'tasks/create.html'
 
-    def form_valid(self, form):
-        types = form.cleaned_data.pop('types')
-        self.task = ToDoList.objects.create(**form.cleaned_data)
-        self.task.types.set(types)
-        return super().form_valid(form)
-
-    def get_redirect_url(self):
-        return redirect('detail_view', pk=self.task.pk)
+    def get_success_url(self):
+        return reverse('detail_view', kwargs={'pk': self.object.pk})
 
 
 class DeleteTask(View):
