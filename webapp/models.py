@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from webapp.validate import MinLengthValidator
 
 
@@ -44,9 +46,11 @@ class ToDoList(BaseModel):
     def __str__(self):
         return f"{self.id}. {self.summary}: {self.status}"
 
+    def get_absolute_url(self):
+        return reverse('detail_view', kwargs={'pk': self.pk})
+
     class Meta:
         db_table = 'tasks'
         verbose_name = 'Описание'
         verbose_name_plural = 'Описания'
-
 

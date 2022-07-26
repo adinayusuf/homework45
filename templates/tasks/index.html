@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ list.summary }}</h5>
                 <p class="card-text">{{ list.description }}</p>
-                <a href="{% url "detail_view" list.pk %}" class="btn btn-primary">MORE</a>
+                <a href="{{ list.get_absolute }}" class="btn btn-primary">MORE</a>
             </div>
         </div>
         <br>

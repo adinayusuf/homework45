@@ -68,9 +68,6 @@ class CreateTask(CreateView):
     form_class = ListForm
     template_name = 'tasks/create.html'
 
-    def get_success_url(self):
-        return reverse('detail_view', kwargs={'pk': self.object.pk})
-
 
 class DeleteTask(View):
 
