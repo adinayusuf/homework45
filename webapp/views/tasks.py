@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
+from django.views.generic import FormView, ListView, CreateView
 
 from webapp.views.base_view import DetailView
-from forms import ListForm, SearchForm
+from webapp.forms import ListForm, SearchForm
 from webapp.models import ToDoList
 
 

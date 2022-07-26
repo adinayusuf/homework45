@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from webapp.models import ToDoList, Status, Type
+from webapp.models import ToDoList, Status, Type, Project
 
 
 class ToDoListAdmin(admin.ModelAdmin):
@@ -10,9 +10,10 @@ class ToDoListAdmin(admin.ModelAdmin):
     list_filter = ['summary']
     list_display_links = ['summary']
     search_fields = ['summary', 'status']
-    fields = ['summary', 'status', 'type']
+    fields = ['summary', 'status', 'type', 'project']
 
 
 admin.site.register(ToDoList, ToDoListAdmin)
 admin.site.register(Status)
 admin.site.register(Type)
+admin.site.register(Project)
