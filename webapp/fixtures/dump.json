@@ -71,6 +71,7 @@
         "summary": "start to learn english",
         "description": "because you need it",
         "status": 1,
+        "project": 1,
         "types": [
             1
         ]
@@ -80,15 +81,15 @@
     "model": "webapp.todolist",
     "pk": 12,
     "fields": {
-        "created_at": "2022-07-19T10:59:10.575Z",
+        "created_at": "2022-07-22T10:28:59.047Z",
         "updated_at": "2022-07-12T10:31:44.449Z",
         "summary": "Home works gfdf",
-        "description": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+        "description": "t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',",
         "status": 2,
+        "project": 1,
         "types": [
             1,
             2,
-            4,
             6
         ]
     }
@@ -102,6 +103,7 @@
         "summary": "Buy dress",
         "description": "for HB",
         "status": 2,
+        "project": 1,
         "types": [
             1,
             5
@@ -117,6 +119,7 @@
         "summary": "create new task",
         "description": "for homework 50",
         "status": 3,
+        "project": 1,
         "types": [
             1,
             2
@@ -132,6 +135,7 @@
         "summary": "Where does itsd",
         "description": "Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance.",
         "status": 2,
+        "project": 1,
         "types": [
             2,
             3,
@@ -148,6 +152,7 @@
         "summary": "The standard Lorem",
         "description": "n voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
         "status": 3,
+        "project": 1,
         "types": [
             1,
             2,
@@ -160,11 +165,12 @@
     "model": "webapp.todolist",
     "pk": 25,
     "fields": {
-        "created_at": "2022-07-19T11:20:26.629Z",
+        "created_at": "2022-07-22T10:28:47.522Z",
         "updated_at": "2022-07-19T11:20:26.629Z",
-        "summary": "translation by H Rackham",
-        "description": "by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be",
+        "summary": "translation byj",
+        "description": "by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is",
         "status": 3,
+        "project": 1,
         "types": [
             2,
             3,
@@ -182,6 +188,7 @@
         "summary": "The standarddfd",
         "description": "velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
         "status": 3,
+        "project": 1,
         "types": [
             3,
             4
@@ -197,11 +204,133 @@
         "summary": "Lorem Ipsum dzf",
         "description": "ext of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specime",
         "status": 3,
+        "project": 1,
         "types": [
             1,
             2,
             4
         ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 29,
+    "fields": {
+        "created_at": "2022-07-22T10:29:17.334Z",
+        "updated_at": "2022-07-22T10:24:20.691Z",
+        "summary": "Where does it c",
+        "description": "in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem",
+        "status": 1,
+        "project": 1,
+        "types": [
+            2,
+            3,
+            4
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 30,
+    "fields": {
+        "created_at": "2022-07-22T10:25:07.659Z",
+        "updated_at": "2022-07-22T10:25:07.660Z",
+        "summary": "The standard Lo",
+        "description": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+        "status": 1,
+        "project": 1,
+        "types": [
+            4,
+            6
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 31,
+    "fields": {
+        "created_at": "2022-07-22T10:26:44.574Z",
+        "updated_at": "2022-07-22T10:26:44.574Z",
+        "summary": "Sectionwrefsdgf",
+        "description": "Section 1.10.32 of \"de Finibus Bonorum et Malorum\",",
+        "status": 1,
+        "project": 1,
+        "types": [
+            1,
+            3,
+            5
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 32,
+    "fields": {
+        "created_at": "2022-07-26T06:45:56.637Z",
+        "updated_at": "2022-07-26T06:45:56.637Z",
+        "summary": "рапрывпытрпрчьп",
+        "description": "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lo",
+        "status": 1,
+        "project": 1,
+        "types": [
+            1
+        ]
+    }
+},
+{
+    "model": "webapp.todolist",
+    "pk": 34,
+    "fields": {
+        "created_at": "2022-07-26T07:08:26.286Z",
+        "updated_at": "2022-07-26T07:08:26.286Z",
+        "summary": "Начать обучения",
+        "description": "imply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lo",
+        "status": 1,
+        "project": 1,
+        "types": [
+            2,
+            4
+        ]
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 1,
+    "fields": {
+        "data_begin": "2022-07-27",
+        "data_end": "2022-07-26",
+        "title": "Test project test",
+        "description": "qwe"
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 14,
+    "fields": {
+        "data_begin": "2020-07-01",
+        "data_end": "2022-07-11",
+        "title": "project",
+        "description": "Project1"
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 15,
+    "fields": {
+        "data_begin": "2022-07-01",
+        "data_end": "2022-07-11",
+        "title": "qwe",
+        "description": "qwergt"
+    }
+},
+{
+    "model": "webapp.project",
+    "pk": 16,
+    "fields": {
+        "data_begin": "2022-07-17",
+        "data_end": "2022-07-17",
+        "title": "test2",
+        "description": "fsggsgg"
     }
 }
 ]
