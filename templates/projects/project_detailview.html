@@ -2,24 +2,25 @@
 {% block title %} Detail List{% endblock %}
 {% block nav %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_create' %}">Create list</a>
+        <a class="nav-link" href="{% url 'project_create' %}">Create project</a>
     </li>
 {% endblock %}
 {% block content %}
     <br>
     <div class="card text-center">
         <div class="card-header">
-            {{ projects.get_status_display }}
+            {{ project.get_status_display }}
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ projects.title|upper }}</h5>
-            <p class="card-text">{{ projects.description }}</p>
-            <a href="{% url 'project_delate' projects.pk %}" class="btn btn-primary">DELETE</a>
-{#            <a href="{% url 'update' to_do_list.pk %}" class="btn btn-primary">EDIT</a>#}
+            <h5 class="card-title">{{ project.title|upper }}</h5>
+            <p class="card-text">{{ project.description }}</p>
+
+            <a href="{% url 'project_delete' project.pk %}" class="btn btn-primary">DELETE</a>
+           <a href="{% url 'project_update' project.pk %}" class="btn btn-primary">EDIT</a>
             <a href="{% url 'project_view' %}" class="btn btn-primary">BACK</a>
         </div>
         <div class="card-footer text-muted">
-            {{ projects.data_begin }}
+            {{ project.data_begin }}
         </div>
     </div>
 {% endblock %}

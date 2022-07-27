@@ -1,3 +1,13 @@
+{##}
+{##}
+{#{% extends 'base.html' %}#}
+{#{% block title %}Main{% endblock %}#}
+{#{% block content %}#}
+{#    <h1><a href="{% url "project_view" project.pk %}">Projects View</a></h1>#}
+{#    <h1><a href="{% url "index" %}">Tasks View</a></h1>#}
+{#{% endblock %}#}
+
+
 {% extends "base.html" %}
 {% block title %} To do list{% endblock %}
 {% load static %}
@@ -5,8 +15,8 @@
     <li class="nav-item">
         <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
     </li>
-     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_view' %}">Create Project</a>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'project_view' %}"> View project</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -26,4 +36,5 @@
         {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}
+
 

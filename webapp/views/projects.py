@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
 from django.views import View
@@ -21,22 +23,17 @@ class ProjectListView(ListView):
 class ProjectDetailView(DetailView):
     template_name = "projects/project_detailview.html"
     model = Project
-    context_object_name = 'projects'
-    ordering = 'title'
+    context_object_name = "project"
 
 
 class ProjectCreateView(CreateView):
+    model = Project
     form_class = ProjectForm
     template_name = 'projects/project_create.html'
-    model = Project
 
-    def form_valid(self, form):
-        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        form.instance.project = project
-        return super().form_valid(form)
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={"pk": self.object.pk})
 
-    def get_redirect_url(self):
-        return redirect('projects/project_create.html', kwargs={"pk": self.object.project.pk})
 
 class ProjectDelete(View):
     def dispatch(self, request, *args, **kwargs):
@@ -52,10 +49,14 @@ class ProjectDelete(View):
         return redirect("project_view")
 
 
-
 class ProjectUpdate(FormView):
     form_class = ProjectForm
     template_name = "projects/project_update.html"
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        kwargs['project'] = self.project
+        return super().get_context_data(**kwargs)
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.project.pk})
@@ -69,7 +70,7 @@ class ProjectUpdate(FormView):
 
     def get_initial(self):
         initial = {}
-        for key in 'title', 'description':
+        for key in 'title', 'description', 'data_begin', 'data_end':
             initial[key] = getattr(self.project, key)
         return initial
 

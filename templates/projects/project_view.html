@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} To do list{% endblock %}
+{% block title %} Projects{% endblock %}
 {% load static %}
 {% block nav %}
     <li class="nav-item">
@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ project.title }}</h5>
                 <p class="card-text">{{ project.description }}</p>
-                <a href="{{ project.get_absolute }}" class="btn btn-primary">MORE</a>
+                <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary">MORE</a>
             </div>
         </div>
         <br>
