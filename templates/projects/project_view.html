@@ -7,7 +7,6 @@
     </li>
 {% endblock %}
 {% block content %}
-{#    {% include 'partial/simple_search.html' %}#}
     <h1>Projects</h1>
     {% for project in  projects %}
         <div class="card" style="width: 18rem;">
@@ -19,8 +18,5 @@
         </div>
         <br>
     {% endfor %}
-{#    {% if is_paginated %}#}
-{#        {% include 'partial/pagination.html' %}#}
-{#    {% endif %}#}
 {% endblock %}
 
