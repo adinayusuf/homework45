@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 from django.views import View
-from django.views.generic import FormView, ListView, CreateView
+from django.views.generic import FormView, ListView, CreateView, UpdateView, DeleteView
 
 from webapp.views.base_view import DetailView
 from webapp.forms import ListForm, SearchForm
@@ -69,47 +69,19 @@ class CreateTask(CreateView):
     template_name = 'tasks/create.html'
 
 
-class DeleteTask(View):
-
-    def dispatch(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        self.list = get_object_or_404(ToDoList, pk=pk)
-        return super().dispatch(request, *args, **kwargs)
-
-    def get(self, request, *args, **kwargs):
-        return render(request, "tasks/delete.html", {'list': self.list})
-
-    def post(self, request, *args, **kwargs):
-        self.list.delete()
-        return redirect("index")
+class DeleteTask(DeleteView):
+    template_name = "tasks/delete.html"
+    model = ToDoList
+    context_object_name = 'to_do_list'
+    redirect_url = reverse_lazy('index')
 
 
-class UpdateTask(FormView):
+
+class UpdateTask(UpdateView):
     form_class = ListForm
     template_name = "tasks/update.html"
+    model = ToDoList
+    context_object_name = 'to_do_list'
 
     def get_success_url(self):
-        return reverse('detail_view', kwargs={'pk': self.task.pk})
-
-    def dispatch(self, request, *args, **kwargs):
-        self.task = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_object(self):
-        return get_object_or_404(ToDoList, pk=self.kwargs.get('pk'))
-
-    def get_initial(self):
-        initial = {}
-        for key in 'summary', 'description', 'status':
-            initial[key] = getattr(self.task, key)
-        initial['types'] = self.task.types.all()
-        return initial
-
-    def form_valid(self, form):
-        types = form.cleaned_data.pop('types')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                setattr(self.task, key, value)
-        self.task.save()
-        self.task.types.set(types)
-        return super().form_valid(form)
+        return reverse('detail_view', kwargs={'pk': self.object.pk})
