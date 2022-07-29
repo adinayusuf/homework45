@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
-
+from django.utils import timezone
+from django.contrib.auth.models import User
 from webapp.validate import MinLengthValidator
 
 
@@ -57,11 +58,13 @@ class ToDoList(BaseModel):
         verbose_name_plural = 'Описания'
 
 
+
 class Project(models.Model):
     data_begin = models.DateField(max_length=20, verbose_name='Дата начала')
     data_end = models.DateField(max_length=20, null=True, blank=True, verbose_name='Дата Окончания')
     title = models.CharField(max_length=20, verbose_name="Название")
     description = models.TextField(max_length=2000, verbose_name="Описание")
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.id}. {self.title}: {self.description}"

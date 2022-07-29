@@ -37,7 +37,7 @@ class ProjectDelete(DeleteView):
     template_name = 'projects/project_delete.html'
     model = Project
     context_object_name = 'project'
-    redirect_url = reverse_lazy('project_view')
+    success_url = reverse_lazy('project_view')
 
 
 class ProjectUpdate(UpdateView):
