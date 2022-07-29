@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.models import User
+
 from webapp.validate import MinLengthValidator
 
 
@@ -56,7 +57,6 @@ class ToDoList(BaseModel):
         db_table = 'tasks'
         verbose_name = 'Описание'
         verbose_name_plural = 'Описания'
-
 
 
 class Project(models.Model):

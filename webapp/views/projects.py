@@ -39,6 +39,9 @@ class ProjectDelete(DeleteView):
     context_object_name = 'project'
     success_url = reverse_lazy('project_view')
 
+    def get_queryset(self):
+        return super().get_queryset().filter(is_deleted=False)
+
 
 class ProjectUpdate(UpdateView):
     form_class = ProjectForm
