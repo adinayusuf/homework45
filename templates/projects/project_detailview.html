@@ -17,8 +17,24 @@
 
             <a href="{% url 'webapp:project_delete' project.pk %}" class="btn btn-primary">DELETE</a>
            <a href="{% url 'webapp:project_update' project.pk %}" class="btn btn-primary">EDIT</a>
-            <a href="{% url 'webapp:project_view' %}" class="btn btn-primary">BACK</a>
+            <a href="{% url 'webapp:index' %}" class="btn btn-primary">BACK</a>
         </div>
+        <div class="card-body">
+             <h6>Tasks:</h6>
+            {% for to_do_list in project.project_tasks.all %}
+                <br>
+                <div class="card p-2" style="max-width: 400px;">
+                    <div>
+                        <p class="card-title ">{{ to_do_list.summary }}</p>
+                        <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger" style="float: right">
+                            Удалить</a>
+                        <a href="{% url "webapp:detail_view" to_do_list.pk %}" class="btn btn-info" style="float: right">
+                            Детальный просмотр</a>
+
+                    </div>
+                </div>
+            {% endfor %}
+         </div>
         <div class="card-footer text-muted">
             {{ project.data_begin }}
         </div>

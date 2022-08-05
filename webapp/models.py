@@ -39,8 +39,7 @@ class Type(models.Model):
 
 
 class ToDoList(BaseModel):
-    summary = models.CharField(max_length=15, null=True, blank=False, verbose_name="Name",
-                               validators=[MinLengthValidator(15)])
+    summary = models.CharField(max_length=15, null=True, blank=False, verbose_name="Name")
     description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Description')
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks',
                                verbose_name='Status')
