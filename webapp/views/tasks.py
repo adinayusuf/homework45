@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
@@ -64,7 +65,7 @@ class SearchView(ListView):
         return ToDoList.objects.all()
 
 
-class CreateTask(CreateView):
+class CreateTask(LoginRequiredMixin, CreateView):
     form_class = ListForm
     template_name = 'tasks/create.html'
 
@@ -73,8 +74,7 @@ class DeleteTask(DeleteView):
     template_name = "tasks/delete.html"
     model = ToDoList
     context_object_name = 'to_do_list'
-    redirect_url = reverse_lazy('index')
-
+    success_url = reverse_lazy('webapp:index')
 
 
 class UpdateTask(UpdateView):
@@ -84,4 +84,4 @@ class UpdateTask(UpdateView):
     context_object_name = 'to_do_list'
 
     def get_success_url(self):
-        return reverse('detail_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:detail_view', kwargs={'pk': self.object.pk})

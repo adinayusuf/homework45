@@ -4,7 +4,7 @@
 {#{% block title %}Main{% endblock %}#}
 {#{% block content %}#}
 {#    <h1><a href="{% url "project_view" project.pk %}">Projects View</a></h1>#}
-{#    <h1><a href="{% url "index" %}">Tasks View</a></h1>#}
+{#    <h1><a href="{% url "webapp:index" %}">Tasks View</a></h1>#}
 {#{% endblock %}#}
 
 
@@ -12,11 +12,13 @@
 {% block title %} To do list{% endblock %}
 {% load static %}
 {% block nav %}
+     {% if request.user.is_authenticated %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'create_task' %}">Create list</a>
+        <a class="nav-link" href="{% url 'webapp:create_task' %}">Create list</a>
     </li>
+       {% endif %}
     <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_view' %}"> View project</a>
+        <a class="nav-link" href="{% url 'webapp:project_view' %}"> View project</a>
     </li>
 {% endblock %}
 {% block content %}
@@ -27,7 +29,9 @@
             <div class="card-body">
                 <h5 class="card-title">{{ list.summary }}</h5>
                 <p class="card-text">{{ list.description }}</p>
-                <a href="{% url 'detail_view' list.pk  %}" class="btn btn-primary">MORE</a>
+                {% if request.user.is_authenticated %}
+                <a href="{% url 'webapp:detail_view' list.pk  %}" class="btn btn-primary">MORE</a>
+                       {% endif %}
             </div>
         </div>
         <br>

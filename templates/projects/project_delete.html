@@ -6,6 +6,6 @@
         {% csrf_token %}
         <h2>Are you sure you want to delete the article {{ project.title }}?</h2>
         <button type="submit" class="btn btn-primary">YES</button>
-        <a href="{% url 'project_detail' project.pk %}" class="btn btn-primary">NO</a>
+        <a href="{% url 'webapp:project_detail' project.pk %}" class="btn btn-primary">NO</a>
     </form>
 {% endblock %}

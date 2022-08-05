@@ -7,15 +7,15 @@ from webapp.validate import MinLengthValidator
 
 
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(auto_now=True, verbose_name='Время создания')
-    updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Время изменения')
+    created_at = models.DateTimeField(auto_now=True, verbose_name='Created at')
+    updated_at = models.DateTimeField(auto_now_add=True, verbose_name='Updated at')
 
     class Meta:
         abstract = True
 
 
 class Status(models.Model):
-    status = models.CharField(max_length=40, verbose_name='Статус')
+    status = models.CharField(max_length=40, verbose_name='Status')
 
     def __str__(self):
         return f"{self.status}"
@@ -27,7 +27,7 @@ class Status(models.Model):
 
 
 class Type(models.Model):
-    type = models.CharField(max_length=40, verbose_name='Тип')
+    type = models.CharField(max_length=40, verbose_name='Type')
 
     def __str__(self):
         return f"{self.type}"
@@ -39,19 +39,20 @@ class Type(models.Model):
 
 
 class ToDoList(BaseModel):
-    summary = models.CharField(max_length=15, null=True, blank=False, verbose_name="Описание",
+    summary = models.CharField(max_length=15, null=True, blank=False, verbose_name="Name",
                                validators=[MinLengthValidator(15)])
-    description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Текст')
-    status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks')
-    types = models.ManyToManyField('webapp.Type', related_name='type_tasks', blank=True)
+    description = models.TextField(max_length=3000, null=True, blank=True, verbose_name='Description')
+    status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status_tasks',
+                               verbose_name='Status')
+    types = models.ManyToManyField('webapp.Type', related_name='type_tasks', blank=True, verbose_name='Types')
     project = models.ForeignKey('webapp.Project', related_name='project_tasks', default=1, on_delete=models.CASCADE,
-                                verbose_name='Проект')
+                                verbose_name='Project')
 
     def __str__(self):
         return f"{self.id}. {self.summary}: {self.status}"
 
     def get_absolute_url(self):
-        return reverse('detail_view', kwargs={'pk': self.pk})
+        return reverse('webapp:detail_view', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'tasks'
@@ -60,17 +61,17 @@ class ToDoList(BaseModel):
 
 
 class Project(models.Model):
-    data_begin = models.DateField(max_length=20, verbose_name='Дата начала')
-    data_end = models.DateField(max_length=20, null=True, blank=True, verbose_name='Дата Окончания')
-    title = models.CharField(max_length=20, verbose_name="Название")
-    description = models.TextField(max_length=2000, verbose_name="Описание")
+    data_begin = models.DateField(max_length=20, verbose_name='Date begin')
+    data_end = models.DateField(max_length=20, null=True, blank=True, verbose_name='Date end')
+    title = models.CharField(max_length=20, verbose_name="Name")
+    description = models.TextField(max_length=2000, verbose_name="Description")
     is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.id}. {self.title}: {self.description}"
 
     def get_absolute_url(self):
-        return reverse('project_detail', kwargs={'pk': self.pk})
+        return reverse('webapp:project_detail', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'projects'
