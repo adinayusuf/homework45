@@ -57,12 +57,9 @@ class CreateTask(LoginRequiredMixin, CreateView):
     template_name = 'tasks/create.html'
     model = ToDoList
 
-    def form_valid(self, form):
-        task = get_object_or_404(Project, pk=self.kwargs.get("pk"))
-        project = form.save(commit=False)
-        project.task = task
-        project.save()
-        return redirect("tasks/ditail_view", pk=project.pk)
+
+    def get_success_url(self):
+        return reverse("webapp:detail_view", kwargs={"pk": self.object.pk})
 
 
 class DeleteTask(DeleteView):

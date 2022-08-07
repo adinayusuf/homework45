@@ -23,7 +23,7 @@
              <h6>Tasks:</h6>
             {% for to_do_list in project.project_tasks.all %}
                 <br>
-                <div class="card p-2" style="max-width: 400px;">
+                <div class="card p-2 " style="max-width: 400px;">
                     <div>
                         <p class="card-title ">{{ to_do_list.summary }}</p>
                         <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger" style="float: right">

@@ -56,9 +56,6 @@ class ProjectCreateView(CreateView):
     form_class = ProjectForm
     template_name = 'projects/project_create.html'
 
-    def get_success_url(self):
-        return reverse('webapp:project_detail', kwargs={"pk": self.object.pk})
-
 
 class ProjectDelete(DeleteView):
     template_name = 'projects/project_delete.html'
