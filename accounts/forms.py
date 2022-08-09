@@ -17,8 +17,8 @@ class MyUserCreationForm(UserCreationForm):
     def is_valid(self):
         super().is_valid()
         data = self.cleaned_data
-        if not data.get('first_name') and not data.get('last_name'):
-            self.add_error('first_name', 'One of the First Name or Last Name fields must be filled in')
+        if not data.get('first_name'):
+            self.add_error('first_name', 'First Name fields must be filled')
             return False
         return True
 
