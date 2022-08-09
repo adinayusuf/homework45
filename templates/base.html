@@ -32,7 +32,10 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "accounts:login" %}">Enter</a>
+                        <a class="nav-link" href="{% url "accounts:login" %}?next={{ request.get_full_path }}">Enter</a>
+                    </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="{% url "accounts:reqisteration" %}?next={{ request.get_full_path }}">Registration</a>
                     </li>
                 {% endif %}
             </ul>
