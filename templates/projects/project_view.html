@@ -6,9 +6,14 @@
         <li class="nav-item">
             <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:create_task' %}">Create task</a>
+        </li>
+        {% if  perms.webapp.add_projectuser %}
             <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:create_task' %}">Create task</a>
-    </li>
+                <a class="nav-link" href="{% url 'webapp:members_add' project.pk %}"> Add Member</a>
+            </li>
+        {% endif %}
     {% endif %}
 {% endblock %}
 {% block content %}
@@ -25,9 +30,29 @@
             </div>
         </div>
         <br>
-        {% if is_paginated %}
-            {% include 'partial/pagination.html' %}
-        {% endif %}
+
     {% endfor %}
+    <h1>Members:</h1>
+    {% for p in project.projectusers.all %}
+        <br>
+        <div class="card" style="max-width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title">Name: <a
+                        href="{% url 'accounts:user_profile' p.user.pk %}">{% firstof p.user.first_name p.user.last_name p.user.username %}</a>
+                </h5>
+                <p class="card-text">Role: {{ p.get_role_display }}</p>
+                {% if perms.To_Do_list.delete_projectuser %}
+                    <form action="{% url 'webapp:members_delete' project.pk %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_id" value="{{ p.user.pk }}">
+                        <button type="submit" class="btn-danger">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
 {% endblock %}
 

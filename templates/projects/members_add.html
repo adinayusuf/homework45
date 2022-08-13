@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}New member of the project{% endblock %}
+{% block nav %} {% endblock %}
+{% block content %}
+    <h1>Add a new member!</h1>
+    <form action="{% url "webapp:members_add" project.pk%}" method="post">
+    {% include 'partial/form.html' with button_text="Create" %}
+    </form>
+{% endblock %}

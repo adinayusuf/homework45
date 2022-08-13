@@ -1,11 +1,12 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
-from webapp.forms import ProjectForm, SearchForm
-from webapp.models import Project
+from webapp.forms import SearchForm, ProjectForm, MemberAddForm
+from webapp.models import Project, ProjectUser, PROJECT_MANAGER
 
 
 class ProjectListView(ListView):
@@ -65,7 +66,6 @@ class ProjectDelete(PermissionRequiredMixin, DeleteView):
 
 
 class ProjectUpdate(PermissionRequiredMixin, UpdateView):
-    form_class = ProjectForm
     template_name = "projects/project_update.html"
     model = Project
     context_object_name = 'project'
@@ -85,3 +85,57 @@ class SearchView(ListView):
         if form.is_valid():
             return Project.objects.filter(title__icontains=form.cleaned_data['title'])
         return Project.objects.all()
+
+
+class ProjectMembersAdd(PermissionRequiredMixin, CreateView):
+    permission_required = "webapp.add_projectuser"
+    model = Project
+    template_name = 'projects/members_add.html'
+    form_class = MemberAddForm
+
+    def post(self, request, *args, **kwargs):
+        project = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            pru = form.save(commit=False)
+            pru.project = project
+            pru.save()
+            return redirect('webapp:index', pk=project.pk)
+        else:
+            return self.form_invalid(form)
+
+    def get(self, request, *args, **kwargs):
+        project = self.get_object()
+        form = MemberAddForm(project_id=project.id)
+        return render(request, self.template_name, {'form': form, 'project': project})
+
+    def has_permission(self):
+        project = self.get_object()
+        user_id = self.request.POST.get('user_id')
+        if ProjectUser.objects.filter(user=self.request.user, project=project).exists():
+            member = ProjectUser.objects.get(user=self.request.user, project=project)
+            return super().has_permission() and user_id != self.request.user.id and member.role
+        else:
+            return False
+
+
+class ProjectMembersDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = "webapp.delete_projectuser"
+    model = Project
+    success_url = reverse_lazy('webapp:index')
+
+    def post(self, request, *args, **kwargs):
+        project = self.get_object()
+        user_id = request.POST.get('user_id')
+        project.participants.remove(user_id)
+        return redirect('webapp:index', pk=project.pk)
+
+    def has_permission(self):
+        project = self.get_object()
+        user_id = self.request.POST.get('user_id')
+        if ProjectUser.objects.filter(user=self.request.user, project=project).exists():
+            member = ProjectUser.objects.get(user=self.request.user, project=project)
+            return super().has_permission() and int(
+                user_id) != self.request.user.id and member.role == PROJECT_MANAGER
+        else:
+            return False
