@@ -1,9 +1,16 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
-from django.utils import timezone
 from django.contrib.auth.models import User
 
-from webapp.validate import MinLengthValidator
+# PROJECT_MANAGER = "project_manager"
+# TEAM_LEAD = "team_lead"
+# DEVELOPER = "developer"
+# ROLE_CHOIСES = [
+#     (PROJECT_MANAGER, "Project Manager"),
+#     (TEAM_LEAD, "Team Lead"),
+#     (DEVELOPER, "Developer")
+# ]
 
 
 class BaseModel(models.Model):
@@ -65,6 +72,8 @@ class Project(models.Model):
     title = models.CharField(max_length=20, verbose_name="Name")
     description = models.TextField(max_length=2000, verbose_name="Description")
     is_deleted = models.BooleanField(default=False)
+    members = models.ManyToManyField(User, related_name='projects',
+                                     verbose_name='Projects')
 
     def __str__(self):
         return f"{self.id}. {self.title}: {self.description}"
@@ -76,3 +85,17 @@ class Project(models.Model):
         db_table = 'projects'
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+
+
+# class ProjectUser(models.Model):
+#     project = models.ForeignKey('ToDoList.Project', on_delete=models.CASCADE, related_name='projectusers',
+#                                 verbose_name='Project')
+#     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='userprojects', verbose_name='User')
+#     role = models.CharField(max_length=250, choices=ROLE_CHOIСES, default=PROJECT_MANAGER, verbose_name='Role')
+#
+#     class Meta:
+#         db_table = 'projectuser'
+#         unique_together = ('project', 'user')
+#
+#     def __str__(self):
+#         return f"{self.user}. {self.project.summary} - {self.role}"

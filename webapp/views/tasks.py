@@ -1,14 +1,11 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
 from django.urls import reverse, reverse_lazy
-from django.utils.http import urlencode
-from django.views import View
-from django.views.generic import FormView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from webapp.views.base_view import DetailView
-from webapp.forms import ListForm, SearchForm
-from webapp.models import ToDoList, Project
+from webapp.forms import ListForm
+from webapp.models import ToDoList
 
 
 # class IndexView(ListView):
@@ -52,17 +49,16 @@ class ListTaskView(DetailView):
     model = ToDoList
 
 
-class CreateTask(LoginRequiredMixin, CreateView):
+class CreateTask(PermissionRequiredMixin, CreateView):
     form_class = ListForm
     template_name = 'tasks/create.html'
     model = ToDoList
-
 
     def get_success_url(self):
         return reverse("webapp:detail_view", kwargs={"pk": self.object.pk})
 
 
-class DeleteTask(DeleteView):
+class DeleteTask(PermissionRequiredMixin, DeleteView):
     template_name = "tasks/delete.html"
     model = ToDoList
     context_object_name = 'to_do_list'
@@ -72,7 +68,7 @@ class DeleteTask(DeleteView):
         return reverse("webapp:project_detail", kwargs={"pk": self.object.project.pk})
 
 
-class UpdateTask(UpdateView):
+class UpdateTask(PermissionRequiredMixin, UpdateView):
     form_class = ListForm
     template_name = "tasks/update.html"
     model = ToDoList

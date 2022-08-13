@@ -1,7 +1,8 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
 from django.urls import reverse, reverse_lazy
 from django.utils.http import urlencode
-from django.views.generic import DetailView, ListView, CreateView, FormView, DeleteView, UpdateView
+from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
 from webapp.forms import ProjectForm, SearchForm
 from webapp.models import Project
@@ -12,10 +13,6 @@ class ProjectListView(ListView):
     context_object_name = 'projects'
     ordering = 'title'
     template_name = 'projects/project_view.html'
-
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     return queryset
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
@@ -51,13 +48,13 @@ class ProjectDetailView(DetailView):
     context_object_name = "project"
 
 
-class ProjectCreateView(CreateView):
+class ProjectCreateView(PermissionRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
     template_name = 'projects/project_create.html'
 
 
-class ProjectDelete(DeleteView):
+class ProjectDelete(PermissionRequiredMixin, DeleteView):
     template_name = 'projects/project_delete.html'
     model = Project
     context_object_name = 'project'
@@ -67,7 +64,7 @@ class ProjectDelete(DeleteView):
         return super().get_queryset().filter(is_deleted=False)
 
 
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(PermissionRequiredMixin, UpdateView):
     form_class = ProjectForm
     template_name = "projects/project_update.html"
     model = Project
