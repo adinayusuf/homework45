@@ -1,10 +1,127 @@
 [
 {
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Project Manager",
+    "permissions": [
+      [
+        "add_user",
+        "auth",
+        "user"
+      ],
+      [
+        "delete_user",
+        "auth",
+        "user"
+      ],
+      [
+        "add_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "change_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "delete_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "view_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "delete_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "view_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 2,
+  "fields": {
+    "name": "Team Lead",
+    "permissions": [
+      [
+        "add_user",
+        "auth",
+        "user"
+      ],
+      [
+        "delete_user",
+        "auth",
+        "user"
+      ],
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "delete_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "view_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "pk": 3,
+  "fields": {
+    "name": "Developer",
+    "permissions": [
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$320000$OGzwDHiDuzaZp3iEwLCMsD$NCjHK/rg3EUjVS3luAILq5je7m4WpJYIsDvDvSxxSmg=",
-    "last_login": "2022-08-07T06:47:55.501Z",
+    "last_login": "2022-08-14T12:06:16.143Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -22,7 +139,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$320000$DuxyxkgXwPgVywFF5iRw3g$878oUSpG7KZCHB5PrmYNpUk6OHF2JK6fBglixHt+fCk=",
-    "last_login": "2022-08-09T06:34:59.020Z",
+    "last_login": "2022-08-14T08:11:03.578Z",
     "is_superuser": false,
     "username": "adinka16",
     "first_name": "Adina",
@@ -30,9 +147,174 @@
     "email": "adinkayus97@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2022-08-09T06:34:58.782Z",
+    "date_joined": "2022-08-09T06:34:58Z",
     "groups": [],
-    "user_permissions": []
+    "user_permissions": [
+      [
+        "add_project",
+        "webapp",
+        "project"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$iXrUhsrx1zIhB3rlqKDNzK$T8ud0m4t/me1efkZEZg4YaXHx4waLtgC1mQknIyh7QM=",
+    "last_login": "2022-08-14T12:07:58.066Z",
+    "is_superuser": false,
+    "username": "manager",
+    "first_name": "Project Manager",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-08-14T10:28:41Z",
+    "groups": [
+      [
+        "Project Manager"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_user",
+        "auth",
+        "user"
+      ],
+      [
+        "delete_user",
+        "auth",
+        "user"
+      ],
+      [
+        "add_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "change_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "delete_project",
+        "webapp",
+        "project"
+      ],
+      [
+        "add_projectuser",
+        "webapp",
+        "projectuser"
+      ],
+      [
+        "change_projectuser",
+        "webapp",
+        "projectuser"
+      ],
+      [
+        "delete_projectuser",
+        "webapp",
+        "projectuser"
+      ],
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "delete_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$AULsuBMqvcuimpwxabVVSl$EA9vn6vAQSPi828VJhAUgmabV7CPz0S8E1iIy2HnkLE=",
+    "last_login": "2022-08-14T11:04:26Z",
+    "is_superuser": false,
+    "username": "lead",
+    "first_name": "Team Lead",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-08-14T10:29:37Z",
+    "groups": [
+      [
+        "Team Lead"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_projectuser",
+        "webapp",
+        "projectuser"
+      ],
+      [
+        "change_projectuser",
+        "webapp",
+        "projectuser"
+      ],
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "delete_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$mhz28BpTTdwVULH3TVeFqY$krw3DlmmP+/bPj3pbT9O9VC+ci5NYeWxuAv2s1rNogg=",
+    "last_login": "2022-08-14T11:45:07.976Z",
+    "is_superuser": false,
+    "username": "dev",
+    "first_name": "Developer",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-08-14T10:30:31Z",
+    "groups": [
+      [
+        "Developer"
+      ]
+    ],
+    "user_permissions": [
+      [
+        "add_todolist",
+        "webapp",
+        "todolist"
+      ],
+      [
+        "change_todolist",
+        "webapp",
+        "todolist"
+      ]
+    ]
   }
 }
 ]
