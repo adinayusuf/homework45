@@ -50,12 +50,14 @@ class ProjectDetailView(DetailView):
 
 
 class ProjectCreateView(PermissionRequiredMixin, CreateView):
+    permission_required = "webapp.add_project"
     model = Project
     form_class = ProjectForm
     template_name = 'projects/project_create.html'
 
 
 class ProjectDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'webapp.delete_project'
     template_name = 'projects/project_delete.html'
     model = Project
     context_object_name = 'project'
@@ -66,9 +68,11 @@ class ProjectDelete(PermissionRequiredMixin, DeleteView):
 
 
 class ProjectUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = "webapp.change_project"
     template_name = "projects/project_update.html"
     model = Project
     context_object_name = 'project'
+    form_class = ProjectForm
 
     def get_success_url(self):
         return reverse('webapp:project_detail', kwargs={'pk': self.object.pk})

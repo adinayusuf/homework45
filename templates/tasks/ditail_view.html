@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %} Detail List{% endblock %}
 {% block nav %}
-{% if request.user.is_authenticated %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:create_task' %}">Create task</a>
-    </li>
-       {% endif %}
+    {% if request.user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:create_task' %}">Create task</a>
+        </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <br>
@@ -17,9 +17,12 @@
             <h5 class="card-title">{{ to_do_list.summary|upper }}</h5>
             <p class="card-text">{{ to_do_list.description }}</p>
             <p class="card-text">Status: {{ to_do_list.status }}</p>
-            <p>Type: {% for type in to_do_list.types.all %}{{ type.type }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
-            <a href="{% url 'webapp:delete_description' to_do_list.pk %}" class="btn btn-primary">DELETE</a>
-            <a href="{% url 'webapp:update' to_do_list.pk %}" class="btn btn-primary">EDIT</a>
+            <p>Type: {% for type in to_do_list.types.all %}{{ type.type }}{% if not forloop.last %},
+            {% endif %}{% endfor %}</p>
+            {% if  perms.webapp.delete_task %}
+                <a href="{% url 'webapp:delete_description' to_do_list.pk %}" class="btn btn-primary">DELETE</a>
+            {% endif %}
+                <a href="{% url 'webapp:update' to_do_list.pk %}" class="btn btn-primary">EDIT</a>
             <a href="{% url 'webapp:index' %}" class="btn btn-primary">BACK</a>
         </div>
         <div class="card-footer text-muted">

@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 {% block title %} Detail List{% endblock %}
 {% block nav %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
-    </li>
+    {% if  perms.webapp.change_project %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
+        </li>
+    {% endif %}
+    {% if  perms.webapp.add_projectuser %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:members_add' project.pk %}"> Add Member</a>
+        </li>
+    {% endif %}
 {% endblock %}
 {% block content %}
     <br>
@@ -14,27 +21,53 @@
         <div class="card-body">
             <h5 class="card-title">{{ project.title|upper }}</h5>
             <p class="card-text">{{ project.description }}</p>
-
-            <a href="{% url 'webapp:project_delete' project.pk %}" class="btn btn-primary">DELETE</a>
-           <a href="{% url 'webapp:project_update' project.pk %}" class="btn btn-primary">EDIT</a>
+            {% if perms.webapp.delete_project %}
+                <a href="{% url 'webapp:project_delete' project.pk %}" class="btn btn-primary">DELETE</a>
+            {% endif %}
+            {% if perms.webapp.change_project %}
+                <a href="{% url 'webapp:project_update' project.pk %}" class="btn btn-primary">EDIT</a>
+            {% endif %}
             <a href="{% url 'webapp:index' %}" class="btn btn-primary">BACK</a>
         </div>
         <div class="card-body">
-             <h6>Tasks:</h6>
+            <h6>Tasks:</h6>
             {% for to_do_list in project.project_tasks.all %}
                 <br>
                 <div class="card p-2 " style="max-width: 400px;">
                     <div>
                         <p class="card-title ">{{ to_do_list.summary }}</p>
-                        <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger" style="float: right">
-                            Удалить</a>
-                        <a href="{% url "webapp:detail_view" to_do_list.pk %}" class="btn btn-info" style="float: right">
-                            Детальный просмотр</a>
+                        {% if perms.webapp.delete_task %}
+                        <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger"
+                           style="float: right">
+                            Delete</a>
+                        {% endif %}
+                        <a href="{% url "webapp:detail_view" to_do_list.pk %}" class="btn btn-info"
+                           style="float: right">
+                            Detail view</a>
 
                     </div>
                 </div>
             {% endfor %}
-         </div>
+        </div>
+        <h1>Members:</h1>
+        {% for p in project.projectusers.all %}
+            <br>
+            <div class="card" style="max-width: 400px;">
+                <div class="card-body">
+                    <h5 class="card-title">Name:
+                        <a href="{% url 'accounts:user_profile' p.user.pk %}">{% firstof p.user.first_name p.user.last_name p.user.username %}</a>
+                    </h5>
+                    <p class="card-text">Role: {{ p.get_role_display }}</p>
+                    {% if perms.webapp.delete_projectuser %}
+                        <form action="{% url 'webapp:members_delete' project.pk %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="user_id" value="{{ p.user.pk }}">
+                            <button type="submit" class="btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
         <div class="card-footer text-muted">
             {{ project.data_begin }}
         </div>

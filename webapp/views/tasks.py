@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import redirect
 
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -50,6 +51,7 @@ class ListTaskView(DetailView):
 
 
 class CreateTask(PermissionRequiredMixin, CreateView):
+    permission_required = "webapp.add_task"
     form_class = ListForm
     template_name = 'tasks/create.html'
     model = ToDoList
@@ -59,6 +61,7 @@ class CreateTask(PermissionRequiredMixin, CreateView):
 
 
 class DeleteTask(PermissionRequiredMixin, DeleteView):
+    permission_required = "webapp.delete_task"
     template_name = "tasks/delete.html"
     model = ToDoList
     context_object_name = 'to_do_list'
@@ -69,10 +72,15 @@ class DeleteTask(PermissionRequiredMixin, DeleteView):
 
 
 class UpdateTask(PermissionRequiredMixin, UpdateView):
+    permission_required = "webapp.update_task"
     form_class = ListForm
     template_name = "tasks/update.html"
     model = ToDoList
     context_object_name = 'to_do_list'
 
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+        return super().dispatch(request, *args, **kwargs)
     def get_success_url(self):
         return reverse('webapp:detail_view', kwargs={'pk': self.object.project.pk})
