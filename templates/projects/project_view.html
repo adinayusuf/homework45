@@ -3,9 +3,9 @@
 {% load static %}
 {% block nav %}
     {% if  user.is_authenticated %}
-    <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
+        </li>
     {% endif %}
     {% if perms.webapp.add_task %}
         <li class="nav-item">
@@ -15,24 +15,9 @@
 
 {% endblock %}
 {% block content %}
-    {% include 'partial/simple_search.html' %}
-    <h1>Projects</h1>
-    {% for project in  projects %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">{{ project.title }}</h5>
-                <p class="card-text">{{ project.description }}</p>
-                {% if request.user.is_authenticated %}
-                    <a href="{% url 'webapp:project_detail' project.pk %}" class="btn btn-primary">MORE</a>
-                {% endif %}
-            </div>
-        </div>
-        <br>
+    <div class="mt-3">    {% include 'partial/simple_search.html' %} </div>
 
-    {% endfor %}
+    {% include 'partial/project_list_partial.html' %}
 
-    {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
-    {% endif %}
 {% endblock %}
 

@@ -25,12 +25,13 @@
                 {% endblock %}
                 {% if request.user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url "accounts:logout" %}">Get out</a>
+                        <a class="nav-link menu-right" href="{% url "accounts:logout" %}">Get out</a>
                     </li>
-                    <li class="nav-item">
-                        <p>Hello, <a href="{% url 'accounts:profile' request.user.pk %}"> {{ user.username }}</a></p>
+                    <li class="menu-right nav-link">
+                        <p>Hello, <a href="{% url 'accounts:profile' request.user.pk %}" style="text-decoration:none; color: red"> {{ user.username }}</a></p>
                     </li>
                 {% else %}
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url "accounts:login" %}?next={{ request.get_full_path }}">Enter</a>
                     </li>
