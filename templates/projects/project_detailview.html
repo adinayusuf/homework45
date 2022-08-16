@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %} Detail List{% endblock %}
 {% block nav %}
-    {% if  perms.webapp.change_project %}
+    {% if  request.user.is_authenticated %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'webapp:project_create' %}">Create project</a>
         </li>
@@ -9,6 +9,11 @@
     {% if  perms.webapp.add_projectuser %}
         <li class="nav-item">
             <a class="nav-link" href="{% url 'webapp:members_add' project.pk %}"> Add Member</a>
+        </li>
+    {% endif %}
+    {% if perms.webapp.add_task %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:create_task' %}">Create task</a>
         </li>
     {% endif %}
 {% endblock %}
@@ -37,14 +42,15 @@
                     <div>
                         <p class="card-title ">{{ to_do_list.summary }}</p>
                         {% if perms.webapp.delete_task %}
-                        <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger"
-                           style="float: right">
-                            Delete</a>
+                            <a href="{% url "webapp:delete_description" to_do_list.pk %}" class="btn btn-danger"
+                               style="float: right">
+                                Delete</a>
                         {% endif %}
-                        <a href="{% url "webapp:detail_view" to_do_list.pk %}" class="btn btn-info"
-                           style="float: right">
-                            Detail view</a>
-
+                        {% if perms.webapp.delete_task %}
+                            <a href="{% url "webapp:detail_view" to_do_list.pk %}" class="btn btn-info"
+                               style="float: right">
+                                Detail view</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
