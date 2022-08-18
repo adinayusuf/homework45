@@ -14,7 +14,7 @@
     <div class="card flex-row mt-3">
         <div class="card-body">
             {% if user.profile.avatar %}
-                <img scr="{{ user.profile.avatar.url }}" class="card-img- w-25" alt="user avatar">
+                <img src="{{ user.profile.avatar.url }}" class="card-img- w-25" alt="user avatar">
             {% endif %}
             <h5 class="card-title">{{ user.username|upper }}</h5>
             <br>

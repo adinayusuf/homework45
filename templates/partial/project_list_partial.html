@@ -1,4 +1,8 @@
-{% for project in  projects %}
+{% if is_paginated %}
+    {% include 'partial/pagination.html' %}
+{% endif %}
+
+{% for project in projects %}
     <div class="card" style="width: 18rem;">
         <div class="card-body">
             <h5 class="card-title">{{ project.title }}</h5>
@@ -6,9 +10,12 @@
             {% if request.user.is_authenticated %}
                 <a href="{% url 'webapp:project_detail' project.pk %}" class="btn btn-primary">MORE</a>
             {% endif %}
+
         </div>
     </div>
     <br>
+{% empty %}
+    <h5 class="text-center">No project</h5>
 {% endfor %}
 {% if is_paginated %}
     {% include 'partial/pagination.html' %}
