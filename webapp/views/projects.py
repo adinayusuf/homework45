@@ -131,8 +131,8 @@ class ProjectMembersDelete(PermissionRequiredMixin, DeleteView):
     def post(self, request, *args, **kwargs):
         project = self.get_object()
         user_id = request.POST.get('user_id')
-        project.participants.remove(user_id)
-        return redirect('webapp:index', pk=project.pk)
+        project.member.remove(user_id)
+        return redirect('webapp:detail_view', pk=project.pk)
 
     def has_permission(self):
         project = self.get_object()
