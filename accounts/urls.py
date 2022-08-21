@@ -13,5 +13,5 @@ urlpatterns = [
     path('profile/list', UserList.as_view(), name='profile_list'),
 
     path('<int:pk>/change/', ChangeProfileView.as_view(), name='change_profile'),
-    path('/change/password/', ChangePasswordView.as_view(), name='change_password'),
+    path('change/password/', ChangePasswordView.as_view(), name='change_password'),
 ]
